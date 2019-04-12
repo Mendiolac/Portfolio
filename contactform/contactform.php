@@ -35,7 +35,7 @@
     $subject = filter_var($_POST["subject"], FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES);
     $message = filter_var($_POST["message"], FILTER_SANITIZE_STRING);
 
-    if(!$contact_email_to || $contact_email_to == 'mendiolac@outlook.com') {
+    if(!$contact_email_to || $contact_email_to == 'contact@example.com') {
       die('The contact form receiving email address is not configured!');
     }
 
