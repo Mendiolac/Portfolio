@@ -23,6 +23,10 @@ require 'vendor/autoload.php';
   $contact_error_email = "Please enter a valid email!";
   $contact_error_subject = "Subject is too short or empty!";
   $contact_error_message = "Too short message! Please enter something.";
+  
+  //Sendgrid API environment settup
+  $apiKey = getenv('SENDGRID_API_KEY');
+  $sg = new \SendGrid($apiKey);
 
 /********** Do not edit from the below line ***********/
 
@@ -71,7 +75,7 @@ require 'vendor/autoload.php';
     $message_content .= '<strong>' . $email_title . '</strong> ' . $email . '<br>';
     $message_content .= '<strong>' . $message_title . '</strong> ' . nl2br($message);
 
-    $sendemail = mail($contact_email_to, $subject_title . ' ' . $subject, $message_content, $headers);
+    $sendemail = $sg->mail($contact_email_to, $subject_title . ' ' . $subject, $message_content, $headers);
 
     if( $sendemail ) {
       echo 'OK';
