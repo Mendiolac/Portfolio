@@ -1,4 +1,6 @@
 <?php
+require 'vendor/autoload.php';
+
 /*
   PHP contact form script
   Version: 1.1
