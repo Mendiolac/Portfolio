@@ -1,5 +1,5 @@
 <?php
-require 'vendor/autoload.php';
+require '../vendor/autoload.php';
 
 /*
   PHP contact form script
