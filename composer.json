@@ -1,10 +1,10 @@
 
 {
-  "name": "sendgrid/sendgrid",
+  "name": "vender/sendgrid-sendgrid",
   "require": {
-    "sendgrid/sendgrid": "~7"
+    "sendgrid/sendgrid": "7.3.0"
   },
   
-  "description": "This library allows you to quickly and easily send emails through Twilio SendGrid using PHP.",
-  "homepage": "http://github.com/sendgrid/sendgrid-php"
+  "description": "This library allows you to quickly and easily send emails through Twilio SendGrid using PHP."
+  
 }
