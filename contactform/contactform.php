@@ -23,15 +23,8 @@ require '../vendor/autoload.php';
   $contact_error_email = "Please enter a valid email!";
   $contact_error_subject = "Subject is too short or empty!";
   $contact_error_message = "Too short message! Please enter something.";
-
-  $email = new \SendGrid\Mail\Mail(); 
-  $email->setFrom("test@example.com", "Example User");
-  $email->setSubject("Sending with SendGrid is Fun");
-  $email->addTo("test@example.com", "Example User");
-  $email->addContent("text/plain", "and easy to do anywhere, even with PHP");
-  $email->addContent("text/html", "<strong>and easy to do anywhere, even with PHP</strong>");
   
-  $sendgrid = new \SendGrid(getenv('SENDGRID_API_KEY'));
+
 
 /********** Do not edit from the below line ***********/
 
@@ -41,10 +34,10 @@ require '../vendor/autoload.php';
 
   if(isset($_POST)) {
 
-    $name = $sendgrid -> filter_var($_POST["name"], FILTER_SANITIZE_STRING);
-    $email = $sendgrid -> filter_var($_POST["email"], FILTER_SANITIZE_EMAIL);
-    $subject = $sendgrid -> filter_var($_POST["subject"], FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES);
-    $message = $sendgrid -> filter_var($_POST["message"], FILTER_SANITIZE_STRING);
+    $name = filter_var($_POST["name"], FILTER_SANITIZE_STRING);
+    $email = filter_var($_POST["email"], FILTER_SANITIZE_EMAIL);
+    $subject = filter_var($_POST["subject"], FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES);
+    $message = filter_var($_POST["message"], FILTER_SANITIZE_STRING);
 
     if(!$contact_email_to || $contact_email_to == 'contact@example.com') {
       die('The contact form receiving email address is not configured!');
@@ -80,7 +73,7 @@ require '../vendor/autoload.php';
     $message_content .= '<strong>' . $email_title . '</strong> ' . $email . '<br>';
     $message_content .= '<strong>' . $message_title . '</strong> ' . nl2br($message);
 
-    $sendemail = $sg->mail($contact_email_to, $subject_title . ' ' . $subject, $message_content, $headers);
+    $sendemail = mail($contact_email_to, $subject_title . ' ' . $subject, $message_content, $headers);
 
     if( $sendemail ) {
       echo 'OK';
