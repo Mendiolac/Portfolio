@@ -11,20 +11,21 @@ require '../vendor/autoload.php';
 
   // Replace with your real receiving email address
   $contact_email_to = "mendiolac@outlook.com";
+  $email = new \SendGrid\Mail\Mail(); 
 
   // Title prefixes
-  $subject_title = "Contat Form Message:";
+  $subject_title =  "Contact Form Message:";
   $name_title = "Name:";
   $email_title = "Email:";
   $message_title = "Message:";
 
   // Error messages
-  $contact_error_name = "Name is too short or empty!";
+  $contact_error_name ="Name is too short or empty!";
   $contact_error_email = "Please enter a valid email!";
   $contact_error_subject = "Subject is too short or empty!";
   $contact_error_message = "Too short message! Please enter something.";
   
-
+  $sendgrid = new \SendGrid(getenv('SENDGRID_API_KEY'));
 
 /********** Do not edit from the below line ***********/
 
@@ -34,10 +35,10 @@ require '../vendor/autoload.php';
 
   if(isset($_POST)) {
 
-    $name = filter_var($_POST["name"], FILTER_SANITIZE_STRING);
-    $email = filter_var($_POST["email"], FILTER_SANITIZE_EMAIL);
-    $subject = filter_var($_POST["subject"], FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES);
-    $message = filter_var($_POST["message"], FILTER_SANITIZE_STRING);
+    $name = $email-> filter_var($_POST["name"], FILTER_SANITIZE_STRING);
+    $email = $email-> filter_var($_POST["email"], FILTER_SANITIZE_EMAIL);
+    $subject = $email-> filter_var($_POST["subject"], FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES);
+    $message = $email-> filter_var($_POST["message"], FILTER_SANITIZE_STRING);
 
     if(!$contact_email_to || $contact_email_to == 'contact@example.com') {
       die('The contact form receiving email address is not configured!');
@@ -73,7 +74,7 @@ require '../vendor/autoload.php';
     $message_content .= '<strong>' . $email_title . '</strong> ' . $email . '<br>';
     $message_content .= '<strong>' . $message_title . '</strong> ' . nl2br($message);
 
-    $sendemail = mail($contact_email_to, $subject_title . ' ' . $subject, $message_content, $headers);
+    $sendemail = $sendgrid->mail($contact_email_to, $subject_title . ' ' . $subject, $message_content, $headers);
 
     if( $sendemail ) {
       echo 'OK';
