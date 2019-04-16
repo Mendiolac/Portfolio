@@ -10,7 +10,7 @@ require '../vendor/autoload.php';
 /***************** Configuration *****************/
 
   // Replace with your real receiving email address
-  $contact_email_to ="mendiolac@outlook.com";
+  $contact_email_to ="camilledrake95@gmail.com";
   $email = new \SendGrid\Mail\Mail(); 
 
   // Title prefixes
