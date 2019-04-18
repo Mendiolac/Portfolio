@@ -18,6 +18,9 @@ if(isset($_POST['sendemail']))
   if($sendgrid->send($email))
     {
       echo "Email sent Successfully";
+    } else {
+
+      echo 'Could not send email! Please check all field requirements before clicking send.';
    
     }
  
