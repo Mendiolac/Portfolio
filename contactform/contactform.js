@@ -109,7 +109,7 @@ jQuery(document).ready(function($) {
         } else {
           $("#sendmessage").removeClass("show");
           $("#errormessage").addClass("show");
-          $('#errormessage').html(text);
+          $('#errormessage').html(json);
         }
 
       }
