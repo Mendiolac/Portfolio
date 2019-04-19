@@ -15,16 +15,14 @@ if(isset($_POST['sendemail']))
   $email->addContent("text/plain", $message);
  
   $sendgrid = new \SendGrid(getenv('SENDGRID_API_KEY'));
-  if($sendgrid->send($email))
-    {
-      echo "Email sent Successfully";
-    } else {
-
-      echo 'Could not send email! Please check all field requirements before clicking send.';
-   
+    try {
+      $response = $sendgrid->send($email);
+      print $response->statusCode() . "\n";
+      print_r($response->headers());
+      print $response->body() . "\n";
+    } catch (Exception $e) {
+      echo 'Caught exception: '. $e->getMessage() ."\n";
     }
- 
-
 
 }
 ?>
