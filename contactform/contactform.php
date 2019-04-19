@@ -13,12 +13,18 @@ if(isset($_POST['sendemail']))
   $email->setSubject("$subject");
   $email->addTo($email_id, $name);
   $email->addContent("text/plain", $message);
+
+  $API_key = getenv('SENDGRID_API_KEY');
+  $headers = array(
+    'Authorization: Bearer $API_key',
+    'Content-Type: application/json'
+  );
  
-  $sendgrid = new \SendGrid(getenv('SENDGRID_API_KEY'));
+  $sendgrid = new \SendGrid($API_key);
     try {
       $response = $sendgrid->send($email);
       print $response->statusCode() . "\n";
-      print_r($response->headers());
+      print_r($response->$headers());
       print $response->body() . "\n";
     } catch (Exception $e) {
       echo 'Caught exception: '. $e->getMessage() ."\n";
