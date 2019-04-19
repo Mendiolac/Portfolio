@@ -14,7 +14,7 @@ if(isset($_POST['sendemail']))
   $email->addTo($email_id, $name);
   $email->addContent("text/plain", $message);
 
-  $API_key = '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';
+  $API_key = getenv('SENDGRID_API_KEY');
   $headers = array(
     'Authorization: Bearer' ($API_key),
     'Content-Type: application/json'
