@@ -94,7 +94,7 @@ jQuery(document).ready(function($) {
     if( ! action ) {
       action = 'contactform/contactform.php';
     }
-    var json = $.parseJSON(jsonString || "null");
+    
     $.ajax({
       type: "POST",
       url: action,
