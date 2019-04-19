@@ -22,7 +22,7 @@ if(isset($_POST['sendemail']))
  
   $sendgrid = new \SendGrid($API_key);
     try {
-      $response = $sendgrid->send($email_id);
+      $response = $sendgrid->send($email);
       print $response->statusCode() . "\n";
       print_r($response->$headers());
       print $response->body() . "\n";
