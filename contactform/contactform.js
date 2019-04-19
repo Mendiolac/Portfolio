@@ -100,16 +100,16 @@ jQuery(document).ready(function($) {
       url: action,
       dataType: "text",
       success: function(text) {
-        var json = text? $.parseJSON(text) : null;
+      
         // alert(msg);
-        if (json == 'OK') {
+        if (text == 'OK') {
           $("#sendmessage").addClass("show");
           $("#errormessage").removeClass("show");
           $('.contactForm').find("input, textarea").val("");
         } else {
           $("#sendmessage").removeClass("show");
           $("#errormessage").addClass("show");
-          $('#errormessage').html(json);
+          $('#errormessage').html(text);
         }
 
       }
