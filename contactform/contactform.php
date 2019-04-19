@@ -16,7 +16,7 @@ if(isset($_POST['sendemail']))
 
   $API_key = getenv('SENDGRID_API_KEY');
   $headers = array(
-    'Authorization: Bearer $API_key',
+    'Authorization: Bearer' ($API_key),
     'Content-Type: application/json'
   );
  
